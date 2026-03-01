@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export async function GET(request: NextRequest) {
+  if (!supabaseAdmin) {
+    return NextResponse.json(
+      { error: "Service unavailable" },
+      { status: 503 }
+    );
+  }
+
   const password = request.headers.get("x-admin-password");
 
   if (password !== process.env.ADMIN_PASSWORD) {

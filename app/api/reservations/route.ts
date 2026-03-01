@@ -4,6 +4,13 @@ import { resend } from "@/lib/resend";
 import { confirmationEmail } from "@/lib/email-templates";
 
 export async function POST(request: NextRequest) {
+  if (!supabaseAdmin || !resend) {
+    return NextResponse.json(
+      { error: "Service unavailable" },
+      { status: 503 }
+    );
+  }
+
   try {
     const body = await request.json();
     const { name, email, phone, date, time, partySize, requests } = body;

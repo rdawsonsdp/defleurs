@@ -5,6 +5,13 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  if (!supabaseAdmin) {
+    return NextResponse.json(
+      { error: "Service unavailable" },
+      { status: 503 }
+    );
+  }
+
   const password = request.headers.get("x-admin-password");
 
   if (password !== process.env.ADMIN_PASSWORD) {

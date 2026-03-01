@@ -12,46 +12,46 @@ import React, { useEffect, useState } from "react";
 
 const defaultMenuItems = [
   {
-    image: "/carousel/fried-sampler.jpg",
-    alt: "Southern fried sampler platter",
-    title: "The Southern Sampler",
+    image: "/carousel/croissants.jpg",
+    alt: "Warm croissants fresh from the oven",
+    title: "Croissants & Scones",
     description:
-      "Crispy fried chicken, golden popcorn shrimp, hand-battered onion rings, and our tangy house slaw. A little bit of everything done right.",
+      "Warm from the oven with homemade clotted cream, soft butter, and mixed jams. The way every morning should begin.",
   },
   {
-    image: "/carousel/soul-plate.jpg",
-    alt: "Chicken and waffles with maple syrup",
-    title: "Chicken & Waffles",
+    image: "/carousel/tea-sandwiches.jpg",
+    alt: "Delicate tea sandwiches on a platter",
+    title: "Tea Sandwiches",
     description:
-      "Buttermilk-brined fried chicken over a golden Belgian waffle, served with warm maple syrup and a pat of honey butter. Sweet meets savory.",
+      "From tuna cucumber dill to smoked turkey gouda — light, elegant, and made fresh for every service.",
   },
   {
-    image: "/carousel/crispy-chicken.jpg",
-    alt: "Waffle ice cream sandwich with cocoa dust",
-    title: "Waffle Ice Cream Sandwich",
+    image: "/carousel/macarons.jpg",
+    alt: "French macarons in assorted colors",
+    title: "Macarons",
     description:
-      "Two warm pressed waffles hugging a scoop of house-churned vanilla bean ice cream, dusted with cocoa and cinnamon. Dessert worth saving room for.",
+      "Delicate, colorful, and perfectly crisp on the outside with a soft, chewy center. A classic petit four.",
   },
   {
-    image: "/carousel/bbq-spread.jpg",
-    alt: "Brunch plate with waffles, eggs, bacon, and sausage",
-    title: "The Big Southern Brunch",
+    image: "/carousel/caesar-salad.jpg",
+    alt: "Roman caesar salad with parmesan and croutons",
+    title: "Roman Caesar Salad",
     description:
-      "Fluffy scrambled eggs, crispy smoked bacon, griddled sausage links, a golden waffle, and buttered toast with house-made jam. Morning done the Southern way.",
+      "Crisp romaine with caesar dressing, fresh parmesan, and golden croutons. Simple, honest, and satisfying.",
   },
   {
-    image: "/carousel/smoked-ribs.jpg",
-    alt: "Baked mac and cheese casserole",
-    title: "Baked Mac & Cheese",
+    image: "/carousel/berry-trifle.jpg",
+    alt: "Mini berry trifle in a glass",
+    title: "Mini Berry Trifles",
     description:
-      "Three cheeses melted into elbow pasta, baked until the top is golden and bubbling. Rich, creamy, and impossible to eat just one forkful.",
+      "Layers of cream, cake, and fresh seasonal berries in a glass. One of our most-loved petit fours.",
   },
   {
-    image: "/carousel/comfort-classics.jpg",
-    alt: "Classic breakfast plate with eggs, waffle, bacon, and hash brown",
-    title: "Rise & Shine Plate",
+    image: "/carousel/pastry-display.jpg",
+    alt: "Pastry display with madeleines and sweets",
+    title: "Petit Fours",
     description:
-      "Two sunny-side eggs, a crispy hash brown, thick-cut bacon, and a golden waffle with a side of real maple syrup. The breakfast that keeps you coming back.",
+      "Chocolate dipped madeleines, lemon squares, fruit tarts, and more. Pick four from our daily selection.",
   },
 ];
 
@@ -140,11 +140,15 @@ export function Gallery18({
     <section id="relume">
       <div className="px-[5%] py-16 md:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="rb-12 mb-12 text-center md:mb-18 lg:mb-20">
-            <h2 className="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+          <div className="mb-14 text-center md:mb-20 lg:mb-24">
+            <p className="mb-4 text-xs uppercase tracking-[0.3em] text-neutral-400">
+              From Our Kitchen
+            </p>
+            <h2 className="mb-5 font-didot text-3xl font-normal italic tracking-wide md:mb-6 md:text-4xl lg:text-5xl">
               {heading}
             </h2>
-            <p className="md:text-md">{subheading}</p>
+            <div className="mx-auto h-px w-16 bg-neutral-300" />
+            <p className="mt-6 text-base leading-relaxed text-neutral-500 md:text-lg">{subheading}</p>
           </div>
           <Carousel
             setApi={carouselState.setApi}

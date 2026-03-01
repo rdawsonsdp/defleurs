@@ -6,61 +6,73 @@ export const revalidate = 60;
 
 const defaultCategories = [
   {
-    title: "Pour Commencer",
-    subtitle: "To Begin",
+    title: "Croissants & Scones",
+    subtitle: "Warm from the Oven",
     subcategories: [
       {
-        title: "Starters",
+        title: "Pastries",
         items: [
-          { name: "Cornbread Madeleine", description: "Stone-ground cornmeal batter, baked in a shell mold until golden. Served warm with cultured honey butter.", price: "7" },
-          { name: "Pimento Cheese Gougères", description: "Light-as-air choux pastry folded with sharp cheddar, roasted pimento, and a whisper of cayenne.", price: "9" },
-          { name: "Deviled Eggs à l'Ancienne", description: "Farm eggs filled with Dijon cream and smoked paprika, finished with pickled celery seed and chive oil.", price: "8" },
-          { name: "She-Crab Bisque", description: "A velvety bisque of blue crab and roe, perfumed with dry sherry and tarragon. Served in a warm cup.", price: "14" },
+          { name: "Warm Croissants & Scones", description: "With homemade clotted cream, soft butter and mixed jams.", price: "" },
         ],
       },
     ],
   },
   {
-    title: "Les Plats",
-    subtitle: "Main Courses",
+    title: "Light Fare",
+    subtitle: "Pick Two",
     subcategories: [
       {
-        title: "Mains",
+        title: "Sandwiches",
         items: [
-          { name: "Buttermilk Fried Chicken", description: "Heritage bird, brined overnight in buttermilk and black pepper. Double-dredged, fried in cast iron. Rested, never rushed.", price: "28" },
-          { name: "Slow-Smoked Pork Shoulder", description: "Twelve hours over pecan wood. Pulled by hand and dressed with cane vinegar jus. The bark tells the story.", price: "26" },
-          { name: "Pan-Roasted Gulf Redfish", description: "Wild-caught, skin crisped in brown butter. Laid over creamed Carolina Gold rice with a spoonful of sauce meunière.", price: "32" },
-          { name: "Chicken & Waffles", description: "Crisp boneless thigh atop a yeasted Belgian waffle. Bourbon maple syrup and a pat of honey butter on the side.", price: "24" },
-          { name: "Shrimp & Stone-Ground Grits", description: "Gulf shrimp sautéed with Tasso ham and Trinity. Spooned over slow-cooked Anson Mills grits with pot liquor.", price: "27" },
+          { name: "Tuna, Cucumber & Dill Pickle Tea Squares", description: "Tuna, mayo, green onion, lemon juice, salt & pepper topped with fresh cucumbers and fresh minced dill on white bread.", price: "" },
+          { name: "Warm Classic American Grill Cheese", description: "Sliced American cheese grilled on thick-sliced white bread.", price: "" },
+          { name: "Savory Ham & Cheese Rounds", description: "Honey ham, provolone cheese, honey dijon mustard on white whole grain.", price: "" },
+          { name: "Nutella Raspberry Fluff", description: "Chocolate hazelnut Nutella, raspberry preserves, marshmallow fluff, white bread garnished with fresh raspberries.", price: "" },
+          { name: "Smoked Chicken on Focaccia", description: "Smoked pulled chicken, fresh mozzarella, vine-ripened tomatoes, red onions, fresh basil and chipotle sauce on peppered focaccia bread.", price: "" },
+          { name: "Smoked Turkey Gouda", description: "Smoked turkey, sliced bacon, smoked gouda, spicy mustard, tomato on tomato basil bread.", price: "" },
         ],
       },
     ],
   },
   {
-    title: "Les Accompagnements",
-    subtitle: "Sides",
+    title: "A La Carte",
+    subtitle: "Soups & Salads",
     subcategories: [
       {
-        title: "Sides",
+        title: "A La Carte",
         items: [
-          { name: "Collard Greens", description: "Slow-braised with smoked ham hock and apple cider vinegar. Tender, rich, deeply Southern.", price: "8" },
-          { name: "Baked Mac & Cheese", description: "Three cheeses, elbow pasta, baked until the crust turns golden and the center still pulls.", price: "9" },
-          { name: "Skillet Cornbread", description: "Cast-iron baked. Crisp edges, soft center. Arrives with whipped sorghum butter.", price: "6" },
-          { name: "Candied Sweet Potatoes", description: "Roasted low with brown sugar, warm spices, and a caramelized pecan crumble.", price: "8" },
+          { name: "Vegetable Minestrone Soup", description: "", price: "" },
+          { name: "Broccoli Cheddar Soup", description: "", price: "" },
+          { name: "Pizza Bites", description: "", price: "" },
+          { name: "Roman Caesar Salad", description: "With caesar dressing, fresh parmesan and croutons.", price: "" },
         ],
       },
     ],
   },
   {
-    title: "Les Douceurs",
-    subtitle: "Something Sweet",
+    title: "Petit Fours",
+    subtitle: "Pick Four",
     subcategories: [
       {
-        title: "Desserts",
+        title: "Sweets",
         items: [
-          { name: "Peach Cobbler", description: "Ripe Georgia peaches beneath a golden biscuit crust. Served warm with a quenelle of vanilla bean ice cream.", price: "12" },
-          { name: "Bourbon Pecan Pie", description: "Dark and sticky, with toasted pecans and a generous pour of small-batch bourbon baked right in.", price: "11" },
-          { name: "Banana Pudding", description: "Layers of vanilla custard, ripe banana, and butter wafers. Topped with soft meringue, torched to order.", price: "10" },
+          { name: "Macarons", description: "", price: "" },
+          { name: "Lemon Squares", description: "", price: "" },
+          { name: "Mini Berry Trifles", description: "", price: "" },
+          { name: "Chocolate Dipped Madeleines", description: "", price: "" },
+          { name: "Plain Madeleines", description: "", price: "" },
+          { name: "Banana Nut Slice", description: "", price: "" },
+          { name: "Blueberry Muffins", description: "", price: "" },
+          { name: "Cookies", description: "", price: "" },
+          { name: "Donuts", description: "", price: "" },
+          { name: "Fresh Seasonal Fruit", description: "", price: "" },
+          { name: "Fruit Tart", description: "", price: "" },
+          { name: "Banana Vanilla Bean Bomb", description: "", price: "" },
+          { name: "Fresh Dipped Fruit", description: "", price: "" },
+          { name: "Raspberry Truffle Double Chocolate Cake", description: "", price: "" },
+          { name: "Chocolate Covered Pretzels", description: "", price: "" },
+          { name: "Strawberry Cheesecake", description: "", price: "" },
+          { name: "Red Velvet Cheesecake", description: "", price: "" },
         ],
       },
     ],
@@ -68,7 +80,7 @@ const defaultCategories = [
 ];
 
 const defaultFooterNote =
-  "A gratuity of 20% will be added for parties of six or more. Please inform your server of any allergies.";
+  "Vegetarian & gluten free menu available upon request. Add-ons incur additional fees.";
 
 export default async function MenuPage() {
   let categories = defaultCategories;

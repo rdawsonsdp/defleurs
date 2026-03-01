@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
+        sans: ['"Playfair Display"', 'Georgia', 'serif'],
         didot: ['"Playfair Display"', 'Georgia', 'serif'],
       },
     },

@@ -43,6 +43,12 @@ export function Navbar5({ settings = {} }) {
             Tea
           </a>
           <a
+            href="/events"
+            className="text-sm text-neutral-600 transition-colors hover:text-black"
+          >
+            Events
+          </a>
+          <a
             href="#"
             className="text-sm text-neutral-600 transition-colors hover:text-black"
           >
@@ -131,6 +137,9 @@ export function Navbar5({ settings = {} }) {
           </a>
           <a href="/tea" className="text-sm text-neutral-600">
             Tea
+          </a>
+          <a href="/events" className="text-sm text-neutral-600">
+            Events
           </a>
           <a href="#" className="text-sm text-neutral-600">
             Contact

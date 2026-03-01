@@ -13,7 +13,7 @@ export function Footer3({ settings = {} }) {
     "\u00a9 2024 The Parlour @ Maison des Fleurs. All rights reserved.";
   const instagramUrl = settings.socialLinks?.instagram || "#";
   const facebookUrl = settings.socialLinks?.facebook || "#";
-  const footerImage = settings.footerImageUrl || "/hero.jpg";
+  const footerImage = settings.footerImageUrl || "/images/maison-sign1.jpg";
 
   return (
     <footer>
@@ -35,7 +35,7 @@ export function Footer3({ settings = {} }) {
         {/* Content */}
         <div className="relative z-10 px-[5%] py-16 md:py-20 lg:py-24">
           <div className="mx-auto max-w-5xl">
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-10 lg:gap-16">
               {/* Left Column — Address & Reservation */}
               <div>
                 <h3 className="text-xs font-medium uppercase tracking-[0.3em] text-white">
@@ -78,7 +78,7 @@ export function Footer3({ settings = {} }) {
                 </div>
               </div>
 
-              {/* Right Column — Social & Links */}
+              {/* Middle Column — Social & Links */}
               <div>
                 <h3 className="text-xs font-medium uppercase tracking-[0.3em] text-white">
                   Nous Suivre
@@ -141,6 +141,7 @@ export function Footer3({ settings = {} }) {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -148,9 +149,17 @@ export function Footer3({ settings = {} }) {
 
       {/* Copyright bar */}
       <div className="bg-black px-[5%] py-4">
-        <p className="text-center text-[11px] tracking-wide text-white/40">
-          {copyright}
-        </p>
+        <div className="flex items-center justify-center gap-4">
+          <p className="text-[11px] tracking-wide text-white/40">
+            {copyright}
+          </p>
+          <a
+            href="/admin/reservations"
+            className="text-[11px] tracking-wide text-white/20 transition-colors hover:text-white/40"
+          >
+            Admin
+          </a>
+        </div>
       </div>
     </footer>
   );

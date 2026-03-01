@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
 
 type MenuItem = {
   name: string;
@@ -28,6 +29,10 @@ type TabbedMenuProps = {
   footerNote?: string;
 };
 
+const NAVBAR_HEIGHT = 63;
+const STICKY_NAV_HEIGHT = 48;
+const SCROLL_OFFSET = NAVBAR_HEIGHT + STICKY_NAV_HEIGHT + 16;
+
 export function TabbedMenu({
   categories,
   headerTagline = "The Parlour @ Maison des Fleurs \u00b7 Established 1992",
@@ -35,116 +40,176 @@ export function TabbedMenu({
   footerNote,
 }: TabbedMenuProps) {
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
-  const [activeSubcategoryIndex, setActiveSubcategoryIndex] = useState(0);
+  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+  const navRef = useRef<HTMLDivElement>(null);
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const isProgrammaticScroll = useRef(false);
 
-  const activeCategory = categories[activeCategoryIndex];
-  const subcategories = activeCategory?.subcategories || [];
-  const hasSubcategories = subcategories.length > 1;
-  const activeSubcategory = subcategories[activeSubcategoryIndex] || subcategories[0];
-  const items = activeSubcategory?.items || [];
+  // Scroll-spy: highlight active category as user scrolls
+  useEffect(() => {
+    const sections = sectionRefs.current.filter(Boolean) as HTMLElement[];
+    if (sections.length === 0) return;
 
-  const handleCategoryChange = (index: number) => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (isProgrammaticScroll.current) return;
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const index = sections.indexOf(entry.target as HTMLElement);
+            if (index !== -1) {
+              setActiveCategoryIndex(index);
+            }
+          }
+        }
+      },
+      { rootMargin: "-112px 0px -60% 0px" }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [categories]);
+
+  // Auto-scroll nav to keep active button visible
+  useEffect(() => {
+    const button = buttonRefs.current[activeCategoryIndex];
+    const nav = navRef.current;
+    if (button && nav) {
+      const navRect = nav.getBoundingClientRect();
+      const buttonRect = button.getBoundingClientRect();
+      const scrollLeft =
+        button.offsetLeft - navRect.width / 2 + buttonRect.width / 2;
+      nav.scrollTo({ left: scrollLeft, behavior: "smooth" });
+    }
+  }, [activeCategoryIndex]);
+
+  // Tap-to-scroll: smooth scroll to section
+  const handleCategoryTap = useCallback((index: number) => {
     setActiveCategoryIndex(index);
-    setActiveSubcategoryIndex(0);
-  };
+    const section = sectionRefs.current[index];
+    if (!section) return;
+
+    isProgrammaticScroll.current = true;
+    const top =
+      section.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+    window.scrollTo({ top, behavior: "smooth" });
+
+    setTimeout(() => {
+      isProgrammaticScroll.current = false;
+    }, 800);
+  }, []);
 
   return (
-    <section className="pb-20 pt-24 md:pb-28 md:pt-32 lg:pb-36 lg:pt-40">
-      <div className="mx-auto max-w-7xl px-[5%]">
-        {/* Header */}
-        <div className="mb-16 text-center md:mb-20 lg:mb-24">
-          <p className="mb-4 text-xs uppercase tracking-[0.4em] text-neutral-400">
-            {headerTagline}
-          </p>
-          <h1 className="font-didot text-5xl font-normal italic md:text-7xl lg:text-8xl">
-            {headerTitle}
-          </h1>
-          <div className="mx-auto mt-6 h-px w-16 bg-neutral-300" />
+    <section className="bg-[#f5f0eb]">
+      {/* Header */}
+      <MenuHeader tagline={headerTagline} title={headerTitle} />
+
+      {/* Sticky Category Nav */}
+      <nav
+        className="sticky top-[63px] z-40 bg-[#2a3d3a]"
+        role="tablist"
+        aria-label="Menu categories"
+      >
+        <div
+          ref={navRef}
+          className="scrollbar-hide flex overflow-x-auto md:justify-center"
+        >
+          {categories.map((category, index) => (
+            <button
+              key={category.title}
+              ref={(el) => {
+                buttonRefs.current[index] = el;
+              }}
+              onClick={() => handleCategoryTap(index)}
+              className={`relative whitespace-nowrap px-4 py-3 text-xs uppercase tracking-[0.2em] transition-colors md:px-6 md:text-sm ${
+                activeCategoryIndex === index
+                  ? "text-white"
+                  : "text-[#c5a87e]"
+              }`}
+              role="tab"
+              aria-selected={activeCategoryIndex === index}
+            >
+              {category.title}
+              {activeCategoryIndex === index && (
+                <motion.div
+                  layoutId="activeCategory"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#c5a87e]"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+            </button>
+          ))}
         </div>
-      </div>
+      </nav>
 
-      {/* Tab Navigation Area */}
-      <div className="bg-[#2a3d3a]">
-        <div className="mx-auto max-w-4xl px-[5%]">
-          {/* Category Tabs */}
-          <div className="flex items-center justify-center gap-1 pt-6">
-            {categories.map((category, index) => (
-              <button
-                key={category.title}
-                onClick={() => handleCategoryChange(index)}
-                className={`px-5 py-3 text-xs uppercase tracking-[0.2em] transition-colors md:px-8 md:text-sm ${
-                  activeCategoryIndex === index
-                    ? "bg-[#f5f0eb] text-[#2a3d3a]"
-                    : "text-[#c5a87e] hover:text-[#e0cdb5]"
-                }`}
-              >
+      {/* All Menu Sections */}
+      <div>
+        {categories.map((category, catIndex) => (
+          <section
+            key={category.title}
+            ref={(el) => {
+              sectionRefs.current[catIndex] = el;
+            }}
+          >
+            {/* Section Header */}
+            <div className="pt-12 pb-8 text-center md:pt-16 md:pb-10">
+              <h2 className="font-didot text-2xl italic text-[#2a3d3a] md:text-4xl lg:text-5xl">
                 {category.title}
-              </button>
-            ))}
-          </div>
+              </h2>
+              {category.subtitle && (
+                <p className="mt-2 text-[11px] uppercase tracking-[0.3em] text-[#8a9e98]">
+                  {category.subtitle}
+                </p>
+              )}
+              <div className="mx-auto mt-4 h-px w-12 bg-[#c5a87e]" />
+            </div>
 
-          {/* Category Subtitle */}
-          {activeCategory?.subtitle && (
-            <p className="pt-2 text-center text-[11px] uppercase tracking-[0.3em] text-[#8a9e98]">
-              {activeCategory.subtitle}
-            </p>
-          )}
-
-          {/* Subcategory Tabs */}
-          {hasSubcategories && (
-            <div className="flex items-center justify-center gap-6 pb-4 pt-4">
-              {subcategories.map((sub, index) => (
-                <button
-                  key={sub.title}
-                  onClick={() => setActiveSubcategoryIndex(index)}
-                  className={`text-xs uppercase tracking-[0.15em] transition-colors md:text-sm ${
-                    activeSubcategoryIndex === index
-                      ? "text-white"
-                      : "text-[#c5a87e] hover:text-[#e0cdb5]"
-                  }`}
-                >
-                  {sub.title}
-                </button>
+            {/* Items */}
+            <div className="mx-auto max-w-2xl">
+              {category.subcategories.map((sub, subIndex) => (
+                <div key={sub.title}>
+                  {/* Show subcategory heading only when there are multiple */}
+                  {category.subcategories.length > 1 && (
+                    <h3 className="mt-8 mb-4 px-5 font-didot text-lg italic text-[#2a3d3a]">
+                      {sub.title}
+                    </h3>
+                  )}
+                  {sub.items
+                    .filter((item) => item.isAvailable !== false)
+                    .map((item, itemIndex) => (
+                      <div
+                        key={itemIndex}
+                        className="border-b border-[#e0cdb5]/40 px-5 py-6 md:py-8"
+                      >
+                        <div className="flex items-baseline gap-2">
+                          <h3 className="shrink-0 font-didot text-[15px] font-semibold uppercase tracking-wide text-[#2a3d3a] md:text-base">
+                            {item.name}
+                          </h3>
+                          {item.price && (
+                            <>
+                              <div className="flex-1 translate-y-[-3px] border-b border-dotted border-[#c5a87e]" />
+                              <span className="shrink-0 font-didot text-[15px] text-[#2a3d3a] md:text-base">
+                                ${item.price}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                        {item.description && (
+                          <p className="mt-1.5 font-didot text-xs italic leading-relaxed text-[#8a7a6a] md:text-sm">
+                            {item.description}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                </div>
               ))}
             </div>
-          )}
-
-          {/* Spacer if no subcategories */}
-          {!hasSubcategories && <div className="pb-4" />}
-        </div>
-      </div>
-
-      {/* Menu Items */}
-      <div className="bg-[#f5f0eb]">
-        <div className="mx-auto max-w-2xl px-[5%] py-12 md:py-16">
-          {items
-            .filter((item) => item.isAvailable !== false)
-            .map((item, index) => (
-              <div key={index} className="mb-8 last:mb-0 md:mb-10">
-                {/* Name + dotted leader + price */}
-                <div className="flex items-baseline gap-2">
-                  <h3 className="shrink-0 font-didot text-sm font-semibold uppercase tracking-wide text-[#2a3d3a] md:text-base">
-                    {item.name}
-                  </h3>
-                  <div className="flex-1 translate-y-[-3px] border-b border-dotted border-[#c5a87e]" />
-                  <span className="shrink-0 font-didot text-sm tracking-wide text-[#2a3d3a] md:text-base">
-                    ${item.price}
-                  </span>
-                </div>
-                {/* Description */}
-                {item.description && (
-                  <p className="mt-1.5 font-didot text-xs italic leading-relaxed text-[#8a7a6a] md:text-sm">
-                    {item.description}
-                  </p>
-                )}
-              </div>
-            ))}
-        </div>
+          </section>
+        ))}
       </div>
 
       {/* Footer Note */}
       {footerNote && (
-        <div className="px-[5%] pt-12">
+        <div className="px-[5%] pt-12 pb-20 md:pb-28">
           <div className="mx-auto max-w-md text-center">
             <div className="mx-auto mb-6 h-px w-16 bg-neutral-300" />
             <p className="font-didot text-sm italic leading-relaxed text-neutral-400 md:text-base">
@@ -154,5 +219,25 @@ export function TabbedMenu({
         </div>
       )}
     </section>
+  );
+}
+
+function MenuHeader({
+  tagline,
+  title,
+}: {
+  tagline: string;
+  title: string;
+}) {
+  return (
+    <div className="pt-24 pb-8 text-center md:pt-32 lg:pt-40">
+      <p className="mb-4 text-xs uppercase tracking-[0.4em] text-neutral-400">
+        {tagline}
+      </p>
+      <h1 className="font-didot text-5xl font-normal italic md:text-7xl lg:text-8xl">
+        {title}
+      </h1>
+      <div className="mx-auto mt-6 h-px w-16 bg-neutral-300" />
+    </div>
   );
 }

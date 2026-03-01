@@ -49,7 +49,7 @@ export function Navbar5({ settings = {} }) {
             Events
           </a>
           <a
-            href="#"
+            href="/contact"
             className="text-sm text-neutral-600 transition-colors hover:text-black"
           >
             Contact
@@ -141,7 +141,7 @@ export function Navbar5({ settings = {} }) {
           <a href="/events" className="text-sm text-neutral-600">
             Events
           </a>
-          <a href="#" className="text-sm text-neutral-600">
+          <a href="/contact" className="text-sm text-neutral-600">
             Contact
           </a>
           <div className="mt-2 flex gap-3">

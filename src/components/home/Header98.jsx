@@ -9,11 +9,11 @@ export function Header98({
 } = {}) {
   return (
     <section className="bg-[#f5f0eb]">
-      {/* Floral backdrop — decorative, cropped to top */}
-      <div className="relative h-[200px] overflow-hidden sm:h-[260px] lg:h-[320px]">
+      {/* Floral backdrop — decorative */}
+      <div className="relative overflow-hidden">
         <img
           src="/images/maison-header-light.png"
-          className="size-full object-cover object-top"
+          className="w-full"
           alt=""
           aria-hidden="true"
         />

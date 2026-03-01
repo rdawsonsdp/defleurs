@@ -146,18 +146,27 @@ function TeaCard({ tea, isFlipped, onClick }) {
 
         {/* Back */}
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center rounded-sm bg-rose-50/80 px-3"
+          className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-sm bg-rose-50/80 px-2 py-2 sm:px-3"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
         >
-          <p className="mb-2 font-didot text-xs tracking-wide text-neutral-700 sm:text-sm">
+          <p className="mb-1 font-didot text-xs tracking-wide text-neutral-700 sm:mb-2 sm:text-sm">
             {tea.name}
           </p>
-          <p className="text-center text-[11px] leading-relaxed text-neutral-500 sm:text-xs">
+          <p className="line-clamp-3 text-center text-[10px] leading-relaxed text-neutral-500 sm:line-clamp-4 sm:text-xs">
             {tea.description}
           </p>
+          <a
+            href="https://maisondesfleurschicago.com/products/white-jazz"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="mt-2 shrink-0 border border-[#c5a87e] bg-[#c5a87e] px-4 py-1.5 text-[9px] font-medium uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#b0946b] sm:mt-3 sm:px-5 sm:py-2 sm:text-[10px] sm:tracking-[0.25em]"
+          >
+            Shop
+          </a>
         </div>
       </motion.div>
     </div>

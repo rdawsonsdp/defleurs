@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from "@relume_io/relume-ui";
 import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
 const defaultMenuItems = [
@@ -55,50 +56,54 @@ const defaultMenuItems = [
   },
 ];
 
-const FlipCard = ({ item }) => {
-  const [flipped, setFlipped] = useState(false);
+const FoodCard = ({ item, onTap }) => (
+  <div
+    className="aspect-square w-full cursor-pointer"
+    onClick={() => onTap(item)}
+  >
+    <img
+      src={item.image}
+      alt={item.alt || item.title}
+      className="size-full object-cover"
+    />
+  </div>
+);
 
-  return (
-    <div
-      className="aspect-square w-full cursor-pointer"
-      style={{ perspective: "1000px" }}
-      onClick={() => setFlipped((prev) => !prev)}
-    >
-      <div
-        className="relative size-full transition-transform duration-500"
-        style={{
-          transformStyle: "preserve-3d",
-          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
-        }}
+const Lightbox = ({ item, onClose }) => (
+  <AnimatePresence>
+    {item && (
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        onClick={onClose}
       >
-        {/* Front - Image */}
-        <div
-          className="absolute inset-0"
-          style={{ backfaceVisibility: "hidden" }}
+        <motion.div
+          className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-lg bg-[#f5f0eb]"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.25 }}
+          onClick={onClose}
         >
           <img
             src={item.image}
             alt={item.alt || item.title}
-            className="size-full object-cover"
+            className="w-full cursor-pointer object-cover"
           />
-        </div>
-        {/* Back - Description */}
-        <div
-          className="absolute inset-0 flex flex-col items-center justify-center bg-black p-6 text-center text-white md:p-8"
-          style={{
-            backfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
-          }}
-        >
-          <h3 className="mb-3 text-xl font-bold md:text-2xl">{item.title}</h3>
-          <p className="text-sm leading-relaxed text-neutral-300 md:text-base">
-            {item.description}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-};
+          <div className="p-6 text-center" onClick={(e) => e.stopPropagation()}>
+            <h3 className="font-didot text-xl text-[#2a3d3a] md:text-2xl">{item.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-neutral-500 md:text-base">
+              {item.description}
+            </p>
+          </div>
+        </motion.div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+);
 
 const useCarousel = () => {
   const [api, setApi] = useState();
@@ -136,6 +141,7 @@ export function Gallery18({
   menuItems = defaultMenuItems,
 } = {}) {
   const carouselState = useCarousel();
+  const [lightboxItem, setLightboxItem] = useState(null);
   return (
     <section id="relume" className="bg-[#ece5dd]">
       <div className="px-[5%] py-16 md:py-20 lg:py-24">
@@ -161,7 +167,7 @@ export function Gallery18({
                     key={index}
                     className="basis-1/2 px-3 md:basis-1/3 md:px-4"
                   >
-                    <FlipCard item={item} />
+                    <FoodCard item={item} onTap={setLightboxItem} />
                   </CarouselItem>
                 ))}
               </CarouselContent>
@@ -180,6 +186,7 @@ export function Gallery18({
           </Carousel>
         </div>
       </div>
+      <Lightbox item={lightboxItem} onClose={() => setLightboxItem(null)} />
     </section>
   );
 }

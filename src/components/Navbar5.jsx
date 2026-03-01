@@ -25,6 +25,12 @@ export function Navbar5({ settings = {} }) {
         {/* Desktop Nav - Center */}
         <div className="hidden items-center gap-x-8 lg:flex">
           <a
+            href="/"
+            className="text-sm text-neutral-600 transition-colors hover:text-black"
+          >
+            Home
+          </a>
+          <a
             href="/about"
             className="text-sm text-neutral-600 transition-colors hover:text-black"
           >
@@ -129,6 +135,9 @@ export function Navbar5({ settings = {} }) {
         className="overflow-hidden border-t border-neutral-100 bg-[#f5f0eb] lg:hidden"
       >
         <div className="flex flex-col items-center gap-y-6 px-[5%] py-10">
+          <a href="/" className="text-sm text-neutral-600">
+            Home
+          </a>
           <a href="/about" className="text-sm text-neutral-600">
             About
           </a>

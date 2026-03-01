@@ -37,19 +37,14 @@ export function Header98({
         <p className="mt-10 text-base leading-loose text-neutral-500 md:text-lg md:leading-loose">
           {body}
         </p>
-        <div className="mt-12 flex flex-wrap justify-center gap-10">
-          <a
-            href="/menu"
-            className="text-xs uppercase tracking-[0.2em] text-neutral-600 transition-colors hover:text-black"
-          >
-            View Menu
-          </a>
-          <a
-            href="/reserve"
-            className="text-xs uppercase tracking-[0.2em] text-neutral-600 transition-colors hover:text-black"
-          >
-            Reserve a Table
-          </a>
+        <div className="mt-12 flex items-center justify-center gap-3 text-sm tracking-wide sm:gap-4">
+          <a href="/menu" className="text-neutral-400 transition-colors hover:text-neutral-900 hover:underline hover:underline-offset-4">menu</a>
+          <span className="text-neutral-300">·</span>
+          <a href="/tea" className="text-neutral-400 transition-colors hover:text-neutral-900 hover:underline hover:underline-offset-4">tea</a>
+          <span className="text-neutral-300">·</span>
+          <a href="/reserve" className="text-neutral-400 transition-colors hover:text-neutral-900 hover:underline hover:underline-offset-4">reserve</a>
+          <span className="text-neutral-300">·</span>
+          <a href="/events" className="text-neutral-400 transition-colors hover:text-neutral-900 hover:underline hover:underline-offset-4">events</a>
         </div>
       </div>
 

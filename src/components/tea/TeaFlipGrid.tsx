@@ -52,7 +52,14 @@ export const TeaFlipGrid = (props: TeaFlipGridProps) => {
             <p className="text-base leading-loose text-neutral-500 md:text-lg">{description}</p>
           </div>
           <div className="hidden md:block">
-            <Button {...viewAllButton}>{viewAllButton.title}</Button>
+            <a
+              href="https://maisondesfleurschicago.com/collections/teas"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block border border-neutral-900 px-8 py-3 text-sm text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-white"
+            >
+              {viewAllButton.title}
+            </a>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-x-6 gap-y-14 md:gap-x-10 md:gap-y-20 lg:grid-cols-4">
@@ -123,17 +130,15 @@ const TeaCard = ({
           <p className="mb-3 text-center text-[11px] leading-relaxed text-neutral-500 sm:text-xs lg:text-sm">
             {product.description}
           </p>
-          {product.url && product.url !== "#" && (
-            <a
-              href={product.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block rounded-sm bg-neutral-800 px-4 py-1.5 text-[10px] uppercase tracking-widest text-white transition-colors hover:bg-neutral-700 sm:text-xs"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Buy Now
-            </a>
-          )}
+          <a
+            href={product.url && product.url !== "#" ? product.url : "https://maisondesfleurschicago.com/collections/teas"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block border border-[#c5a87e] bg-[#c5a87e] px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#b0946b] sm:px-5 sm:text-xs"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Shop
+          </a>
         </div>
       </motion.div>
     </div>

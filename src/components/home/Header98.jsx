@@ -8,11 +8,11 @@ export function Header98({
   body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
 } = {}) {
   return (
-    <section className="bg-[#f5f0eb]">
+    <section className="border-b border-neutral-200 bg-white">
       {/* Floral backdrop — decorative, cropped to top */}
       <div className="relative h-[200px] overflow-hidden sm:h-[260px] lg:h-[320px]">
         <img
-          src="/images/Floral_Backdrop_1500x.jpg"
+          src="/images/maison-header-light.png"
           className="size-full object-cover object-top"
           alt=""
           aria-hidden="true"

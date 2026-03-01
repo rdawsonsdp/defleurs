@@ -15,7 +15,7 @@ export function Navbar5({ settings = {} }) {
     : "closed";
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-white">
+    <nav className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-[#f5f0eb]">
       <div className="flex items-center justify-between px-6 py-4 md:px-10 lg:px-12">
         {/* Logo */}
         <a href="/" className="font-didot text-2xl tracking-wide">
@@ -126,7 +126,7 @@ export function Navbar5({ settings = {} }) {
         initial="close"
         animate={animateMobileMenu}
         transition={{ duration: 0.3 }}
-        className="overflow-hidden border-t border-neutral-100 bg-white lg:hidden"
+        className="overflow-hidden border-t border-neutral-100 bg-[#f5f0eb] lg:hidden"
       >
         <div className="flex flex-col items-center gap-y-6 px-[5%] py-10">
           <a href="/about" className="text-sm text-neutral-600">

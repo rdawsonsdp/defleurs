@@ -28,7 +28,7 @@ export function Testimonial17({
   testimonials = defaultTestimonials,
 } = {}) {
   return (
-    <section className="px-[5%] py-16 md:py-20 lg:py-24">
+    <section className="bg-[#ece5dd] px-[5%] py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-4xl">
         <div className="mb-16 text-center md:mb-20">
           <p className="text-xs uppercase tracking-[0.3em] text-neutral-400">

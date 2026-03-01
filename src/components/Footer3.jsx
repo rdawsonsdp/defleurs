@@ -8,9 +8,6 @@ export function Footer3({ settings = {} }) {
   const location = settings.location || "Homewood, IL";
   const phone = settings.phone || "(708) 555-0192";
   const hours = settings.hours || "Open Tuesday through Sunday, 5pm \u2013 11pm";
-  const copyright =
-    settings.copyright ||
-    "\u00a9 2024 The Parlour @ Maison des Fleurs. All rights reserved.";
   const instagramUrl = settings.socialLinks?.instagram || "#";
   const facebookUrl = settings.socialLinks?.facebook || "#";
   const footerImage = settings.footerImageUrl || "/images/maison-sign1.jpg";
@@ -147,20 +144,6 @@ export function Footer3({ settings = {} }) {
         </div>
       </div>
 
-      {/* Copyright bar */}
-      <div className="bg-black px-[5%] py-4">
-        <div className="flex items-center justify-center gap-4">
-          <p className="text-[11px] tracking-wide text-white/40">
-            {copyright}
-          </p>
-          <a
-            href="/admin/reservations"
-            className="text-[11px] tracking-wide text-white/20 transition-colors hover:text-white/40"
-          >
-            Admin
-          </a>
-        </div>
-      </div>
     </footer>
   );
 }

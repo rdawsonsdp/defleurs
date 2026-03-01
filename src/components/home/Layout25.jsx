@@ -9,7 +9,7 @@ export function Layout25({
   image = "/images/IMG_8854.jpg",
 } = {}) {
   return (
-    <section className="bg-white px-[5%] py-20 md:py-28 lg:py-36">
+    <section className="bg-[#f5f0eb] px-[5%] py-20 md:py-28 lg:py-36">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-20 lg:gap-28">
         {/* Image — left */}
         <div className="aspect-[4/5] overflow-hidden">

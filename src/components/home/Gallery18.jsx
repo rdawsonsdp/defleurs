@@ -137,7 +137,7 @@ export function Gallery18({
 } = {}) {
   const carouselState = useCarousel();
   return (
-    <section id="relume">
+    <section id="relume" className="bg-[#ece5dd]">
       <div className="px-[5%] py-16 md:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-14 text-center md:mb-20 lg:mb-24">

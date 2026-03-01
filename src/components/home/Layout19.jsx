@@ -3,10 +3,10 @@
 import React from "react";
 
 export function Layout19({
-  label = "Origins",
-  heading = "Built on what matters",
-  body = "This restaurant started with a cast-iron skillet and a conviction. Cook honestly. Source carefully. Serve generously. The rest followed.",
-  image = "/images/maisonstorefront1.jpg",
+  label = "The Parlour",
+  heading = "Where stories pick up right where they left off",
+  body = "Every afternoon, the same thing happens. Old friends sit down and decades disappear. Someone tells the story — the one from twenty-five years ago — and the whole table laughs like it was yesterday. The Parlour was made for this. Not just lunch, but the moment you remember why these people matter.",
+  image = "/images/parlour-gathering.jpg",
 } = {}) {
   return (
     <section className="bg-[#f5f0eb] px-[5%] py-20 md:py-28 lg:py-36">
@@ -24,10 +24,10 @@ export function Layout19({
             {body}
           </p>
           <a
-            href="/about"
+            href="/reserve"
             className="mt-10 inline-block text-xs uppercase tracking-[0.2em] text-neutral-600 transition-colors hover:text-black"
           >
-            Our Story
+            Join Us
           </a>
         </div>
 

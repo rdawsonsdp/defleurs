@@ -7,7 +7,7 @@ export function Cta31({
   body = "Come taste what thirty years of dedication looks like.",
 } = {}) {
   return (
-    <section className="px-[5%] py-16 md:py-20 lg:py-24">
+    <section className="bg-[#f5f0eb] px-[5%] py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="font-didot text-3xl font-normal italic tracking-wide md:text-4xl lg:text-5xl">
           {heading}

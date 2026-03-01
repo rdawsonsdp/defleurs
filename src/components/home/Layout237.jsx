@@ -22,7 +22,7 @@ const defaultFeatures = [
 
 export function Layout237({ features = defaultFeatures }) {
   return (
-    <section className="px-[5%] py-16 md:py-20 lg:py-24">
+    <section className="bg-[#ece5dd] px-[5%] py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-4xl">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-3 md:gap-12">
           {features.map((feature, index) => (
